@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of the deferred all or nothing question behaviour for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,19 +15,28 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Quiz access hide correct questions - provide options to uninstall.
+ * Quiz access hide correct questions - provide mobile support.
  *
  * @package    quizaccess_hidecorrect
- * @subpackage hidecorrect
- * @copyright  2023 LMSACE Dev Team.
+ * @copyright  2023 LMSACE Dev Team <lmsace.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-/**
- * Hide correct sub plugin uninstall steps.
- *
- * @return bool
- */
-function xmldb_quizaccess_hidecorrect_uninstall() {
-    return true;
-}
+defined('MOODLE_INTERNAL') || die();
+
+$addons = [
+
+    "quizaccess_hidecorrect" => [
+        "handlers" => [
+            "hidecorrect" => [
+                "displaydata" => [],
+                "delegate" => "AddonModQuizAccessRuleDelegate",
+                "method" => "mobile_quizaccess_hidecorrect",
+            ],
+        ],
+        "lang" => [
+            ["pluginname", "quizaccess_hidecorrect"],
+            ['pagequestioncompletes', 'quizaccess_hidecorrect'],
+        ],
+    ],
+];
